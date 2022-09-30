@@ -54,6 +54,17 @@ int main() {
     matC = matA * matB;
     std::cout << "matC = matA * matB =\n" << matC << std::endl;
 
+    // También podemos inicializar las matrices directamente.
+    math::matrix<double> matD({
+        {9,  1,  1},
+        {2, 10,  3},
+        {3,  4, 11}
+    });
+
+    // Comprobamos que el producto es, efectivamente, el mismo
+    matC = matD * matB;
+    std::cout << "matC (again) = matA * matB =\n" << matC << std::endl;
+
     /*
      * El operador `!` nos devuelve la matriz inversa. Por tanto,
      * podemos usarlo para resolver la ecuación `Ax = b`.
@@ -65,8 +76,8 @@ int main() {
     std::cout << "Solution `matB` for matA * matB = matC:\n" << matB << std::endl;
 
     /*
-     * Declarad una nueva matrix `matD` e imprimidla por la pantalla después
-     * de almacenar en ella la suma de `matA` y `matB`.
+     * Declarad una nueva matrix `matE` e imprimidla por la pantalla después
+     * de almacenar en ella la suma de `matA` y `matD`.
      */
 
     /*

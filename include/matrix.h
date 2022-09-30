@@ -81,6 +81,8 @@
 #if !defined(__STD_MATRIX_H)
 #define __STD_MATRIX_H
 
+#include <initializer_list>
+
 //////////////////////////////
 // First deal with various shortcomings and incompatibilities of
 // various (mainly old) versions of popular compilers available.
@@ -102,6 +104,7 @@
 #  include <cstdlib>
 #  include <string>
 #  include <iostream>
+#  include <cstring>
 #endif
 
 #if defined(_MSC_VER) && _MSC_VER <= 1000
@@ -218,6 +221,7 @@ public:
    // Constructors
    matrix (const matrixT& m);
    matrix (size_t row = 6, size_t col = 6);
+   matrix (std::initializer_list<std::initializer_list<T>>);
 
    // Destructor
    ~matrix ();
@@ -331,6 +335,30 @@ matrixT::matrix (const matrixT& m)
 {
     _m = m._m;
     _m->Refcnt++;
+}
+
+// initialization constructor
+MAT_TEMPLATE inline
+matrixT::matrix (std::initializer_list<std::initializer_list<T>> elms) {
+   T** rawData = new T*[elms.size()];
+
+   int i = 0, j = 0;
+   for (auto r = elms.begin(); r != elms.end(); ++r) {
+      rawData[i] = new T[r->size()];
+      for (auto c = r->begin(); c != r->end(); ++c) {
+         rawData[i][j] = *c;
+         j++;
+      }
+      i++;
+      j = 0;
+   }
+
+  _m = new base_mat(elms.size(), elms.begin()->size(), rawData);
+
+  for (int i = 0; i < elms.size(); i++)
+      delete[] rawData[i];
+
+   delete[] rawData;
 }
 
 // Internal copy constructor
