@@ -1,7 +1,7 @@
 #include <iostream>
 
 // Incluimos nuestra clase de vector
-#include "mivectort.h"
+#include <mivectort>
 
 // Definimos la dimensión de los vectores con los que vamos a trabajar.
 #define VECTOR_SIZE 5
