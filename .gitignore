@@ -1,0 +1,18 @@
+# Ignore hidden files except the .gitignore
+.*
+!.gitignore
+
+# Ignore built binaries
+bin/
+*.exe
+*.ex
+*.out
+
+# Ignore Emacs temprary files
+*~
+
+# Ignore PDFs
+*.pdf
+
+# Ignore LaTeX files (at least for now)
+*.tex
