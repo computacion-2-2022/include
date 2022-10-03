@@ -7,6 +7,8 @@
 // Email: matrix@techsoftpl.com
 //
 
+// Modified by: Pablo Collado and Jose del Peso (UAM, Madrid)
+
 //////////////////////////////
 // Installation:
 //
@@ -263,6 +265,7 @@ public:
    T Det () const _THROW_MATRIX_ERROR;
    T Norm () _NO_THROW;
    T NormSup () _NO_THROW;
+   T Norm (int) _NO_THROW;
    T Suma () _NO_THROW;
    T Cofact (size_t row, size_t col) _THROW_MATRIX_ERROR;
    T Cond () _NO_THROW;
@@ -918,7 +921,42 @@ matrixT::Norm () _NO_THROW
   
   return retVal;
 }
-// calculate the norm  infinita of a matrix
+
+// calculate the norm of a matrix
+MAT_TEMPLATE inline T
+matrixT::Norm (int tipo) _NO_THROW
+{
+  if(tipo == 1){
+    //Norma del supremo
+     T retVal[_m->Row];
+     for (size_t i=0; i < _m->Row; i++){
+       retVal[i]=0;
+       for (size_t j=0; j < _m->Col; j++){
+         retVal[i] += abs(_m->Val[i][j]);
+       }
+     }
+     double elmayor;
+     elmayor = retVal[0];
+     for(size_t i=1; i < _m->Row; i++){
+       if(retVal[i]>elmayor) elmayor = retVal[i];
+     }
+
+     return elmayor;
+
+  } else{
+    // Norma cuadrática
+    T retVal;
+     retVal=0;
+     for (size_t i=0; i < _m->Row; i++)
+        for (size_t j=0; j < _m->Col; j++)
+    	   retVal += _m->Val[i][j] * _m->Val[i][j];
+     retVal = sqrt( retVal);
+     return retVal;
+  }
+}
+
+
+// calculate the norm Sup of a matrix
  MAT_TEMPLATE inline T
    matrixT::NormSup () _NO_THROW
  {
