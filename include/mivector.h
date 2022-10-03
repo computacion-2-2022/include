@@ -1,3 +1,5 @@
+// Authors: Pablo Collado and Jose del Peso (UAM, Madrid)
+
 #ifndef __MIVECTORT__
 #define __MIVECTORT__
 
@@ -43,7 +45,7 @@ class mivector {
         // Devuelve o asigna la componente especificada del vector.
         T& operator[](int);
 
-        // Superposición de dos vectores.
+        // Suma de dos vectores.
         mivector<T> operator+(const mivector<T>&);
 
         // Resta de dos vectores.
@@ -61,7 +63,7 @@ class mivector {
         // Módulo o norma de un vector.
         T operator||(int);
 
-        // Módulo o norma de un vector.
+        // Módulo o norma cuadrática de un vector.
         T operator~();
 
         // Destructor.
@@ -125,7 +127,7 @@ mivector<T>::mivector(int m) {
 
 /*
  * Este constructor reserva una porción de memoria de
- * `m` elementos y los inicializa a través del puntero `T`.
+ * `m` elementos y los inicializa a través del puntero a `T`.
  */
 template <class T>
 mivector<T>::mivector(T* u, int m) {
@@ -151,7 +153,7 @@ mivector<T>::mivector(std::initializer_list<T> components) {
 
     int i = 0;
     for (T component:components)
-        this->v[i++] = component;
+      this->v[i++] = component; //v[i] y despues incrementa i en uno.
 }
 
 /*
@@ -188,7 +190,7 @@ T& mivector<T>::operator[](int j) {
 
 /*
  * Este método devuelve un nuevo `mivector` que
- * es la superposición del que recibe la llamada
+ * es la suma del que recibe la llamada
  * y el que se pasa como argumento.
  */
 template <class T>
@@ -314,12 +316,12 @@ std::ostream & operator<<(std::ostream & s, mivector<T> z) {
 }
 
 /*
- * Esta clase está orientada a soportar matrices de dos
- * dimensiones donde cada una de ellas es un `mivector`.
+ * Esta clase está orientada a soportar 
+ * una colección de mivectores.
  */
 template <class T, int sz>
-class mivectors : public mivector<T> {
+class mivectores : public mivector<T> {
     public:
-        mivectors() : mivector<T>(sz){};
+        mivectores() : mivector<T>(sz){};
 };
 #endif
