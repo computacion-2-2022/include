@@ -46,6 +46,9 @@ int main() {
     // Podemos calcular productos escalares
     std::cout << "a * b = " << a * b << std::endl;
 
+    // Somos capaces de escalar estos vectores
+    std::cout << "b * 2  = " << b * 2 << " = 2 * b = " << 2 * b << std::endl; 
+
     // Otra operación común es obtener la norma o módulo del vector
     std::cout << "||c = " << (c || 2) << std::endl;
 

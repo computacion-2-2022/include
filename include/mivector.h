@@ -299,6 +299,25 @@ mivector<T>::~mivector() {
 }
 
 /*
+ * Esta sobrecarga del operador `*` permite multiplicar
+ * un escalar por un vector en ese orden
+ */
+template <class T>
+mivector<T> operator*(T a, mivector<T> z) {
+    return z * a;
+}
+
+/*
+ * Esta sobrecarga del operador `*` permite multiplicar
+ * un entero por un vector de dobles sin que ello
+ * implique una ambigüedad en la llamada
+ */
+template <class T>
+mivector<T> operator*(int a, mivector<T> z) {
+    return z * a;
+}
+
+/*
  * Esta sobrecarga del operador `<<` permite imprimir
  * vectores por pantalla de manera cómoda.
  */
