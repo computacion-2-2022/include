@@ -1,0 +1,28 @@
+namespace uam{
+	class frac {
+	private:
+		int num, den;
+	public:
+		frac() {
+			this->num = 0;
+			this->den = 1;
+		};
+		frac(int, int);
+		frac operator+(frac);
+		friend std::ostream& operator<<(std::ostream & s, frac h);
+	};
+
+	frac::frac(int n, int d) {
+		this->num = n;
+		this->den = d;
+	}
+
+	frac frac::operator+(frac h) {
+		return frac(this->num * h.den + h.num * this->den, this->den * h.den);
+	}
+
+	std::ostream& operator<<(std::ostream& s, frac h) {
+		s << h.num << '/' << h.den;
+		return s;
+	}
+};

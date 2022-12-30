@@ -1,0 +1,36 @@
+#include <complex>
+
+namespace uam {
+	template <class T> class complex : public std::complex<T> {
+		public:
+			complex(const T& __re = 0, const T& __im = 0) {
+				this->real(__re);
+				this->imag(__im);
+			}
+
+			complex(const std::complex<T>& __c) {
+				this->real(__c.real());
+				this->imag(__c.imag());
+			}
+
+			complex<T> operator*(int a) {
+				complex<T> ret(this->real() * a, this->imag() * a);
+				return ret;
+			}
+
+			complex<T> operator*(double a) {
+				complex<T> ret(this->real() * a, this->imag() * a);
+				return ret;
+			}
+	};
+
+	template<class T>
+	complex<T> operator*(int a, complex<T> z) {
+		return z * a;
+	}
+
+	template<class T>
+	complex<T> operator*(double a, complex<T> z) {
+		return z * a;
+	}
+}
