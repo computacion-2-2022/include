@@ -358,7 +358,7 @@ matrixT::matrix (std::initializer_list<std::initializer_list<T>> elms) {
 
   _m = new base_mat(elms.size(), elms.begin()->size(), rawData);
 
-  for (int i = 0; i < elms.size(); i++)
+  for (size_t i = 0; i < elms.size(); i++)
       delete[] rawData[i];
 
    delete[] rawData;
